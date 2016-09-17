@@ -50,22 +50,22 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 /* Middleware to prevent CSRF attacks. */
-if(app.get('env') !== 'test') {
-  app.use(csrf());
-
-  app.use(function(req, res, next) {
-    res.cookie('XSRF-TOKEN', req.csrfToken());
-    next();
-  });
-
-  app.use(function(err, req, res, next) {
-    if(err.code === 'EBADCSRFTOKEN') {
-      err.message = 'Invalid CSRF token. Your session has probably expired.';
-      return utils.sendErrResponse(res, 403, err);
-    }
-    next(err);
-  });
-}
+//if(app.get('env') !== 'test') {
+//  app.use(csrf());
+//
+//  app.use(function(req, res, next) {
+//    res.cookie('XSRF-TOKEN', req.csrfToken());
+//    next();
+//  });
+//
+//  app.use(function(err, req, res, next) {
+//    if(err.code === 'EBADCSRFTOKEN') {
+//      err.message = 'Invalid CSRF token. Your session has probably expired.';
+//      return utils.sendErrResponse(res, 403, err);
+//    }
+//    next(err);
+//  });
+//}
 /* Middleware to sanitize inputs to protect against SQL injection. */
 app.use(function(req, res, next) {
   for(var key in req.body) {
