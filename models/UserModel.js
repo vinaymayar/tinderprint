@@ -3,7 +3,7 @@
  *
  * Model for user.
  */
-var mongoose = require('mongoose');
+var mongoose = require('mongoose-q')(require('mongoose'));
 var extend = require('mongoose-schema-extend');
 var bcrypt = require('bcrypt');
 var Schema = mongoose.Schema;

@@ -6,7 +6,8 @@
 
 var express = require('express');
 var router = express.Router();
-var mongoose = require('mongoose');
+//var mongoose = require('mongoose');
+var mongoose = require('mongoose-q')(require('mongoose'));
 var utils = require('../utils/utils');
 var passport = require('passport');
 var uuid = require('node-uuid');
@@ -36,7 +37,7 @@ var UsersController = {
       if (err.code && (err.code === 11000 || err.code === 11001)) {
         return utils.sendErrResponse(res, 400, {'message': 'Username or email is already taken.'});
       } else {
-        return utils.sendErrResponse(res, 500, {'message': 'Unknown database error.'});
+        return utils.sendErrResponse(res, 500, err);
       }
     });
   }
