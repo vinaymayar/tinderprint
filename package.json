@@ -1,0 +1,40 @@
+{
+  "name": "tinderprint",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "test": "NODE_ENV=test ./node_modules/.bin/mocha --reporter spec test/**/*.js"
+  },
+  "engines": {
+    "node": ">= 0.6.0",
+    "npm": ">= 1.0.0"
+  },
+  "dependencies": {
+    "bcrypt": "~0.8.0",
+    "body-parser": "~1.8.1",
+    "bson": "^0.5.5",
+    "cookie-parser": "~1.3.3",
+    "csurf": "~1.6.3",
+    "debug": "~2.0.0",
+    "ejs": "~0.8.5",
+    "express": "~4.9.0",
+    "express-session": "^1.8.2",
+    "mongodb": "1.4.15",
+    "mongoose": "*",
+    "mongoose-q": "0.0.13",
+    "mongoose-schema-extend": "0.1.7",
+    "morgan": "~1.3.0",
+    "node-uuid": "1.4.1",
+    "nodemailer": "0.7.0",
+    "passport": "^0.2.1",
+    "passport-local": "^1.0.0",
+    "serve-favicon": "~2.1.3"
+  },
+  "main": "./bin/www",
+  "devDependencies": {
+    "mocha": "^2.0.1",
+    "passport-stub": "^1.0.1",
+    "supertest": "^0.15.0"
+  }
+}
