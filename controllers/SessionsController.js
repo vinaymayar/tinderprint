@@ -28,10 +28,7 @@ var SessionsController = {
         if (err) {
           return next(err);
         } else {
-          var returnedUser = {'_id': user._id,
-                              'username': user.username,
-                              'email': user.email};
-          return utils.sendSuccessResponse(res, returnedUser);
+          return res.render('candidates');
         }
       });
     })(req, res, next);
