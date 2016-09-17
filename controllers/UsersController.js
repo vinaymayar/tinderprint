@@ -21,7 +21,12 @@ var UsersController = {
     var newUser = new User({
       username: req.body.username,
       password: req.body.password,
-      email: req.body.email
+      email: req.body.email,
+      name: req.body.name,
+      bio: req.body.bio,
+      gender: req.body.gender,
+      preferences: req.body.preferences,
+      birthday: req.body.birthday
     });
     return newUser
     .saveQ()

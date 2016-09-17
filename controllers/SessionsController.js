@@ -18,7 +18,7 @@ var SessionsController = {
   /* Login as an existing user */
   login: function(req, res, next) {
     passport.authenticate('local', function(err, user, info) {
-      if (err) { 
+      if (err) {
         return next(err);
       };
       if (!user) {

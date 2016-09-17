@@ -10,9 +10,28 @@ var Schema = mongoose.Schema;
 var SALT_WORK_FACTOR = 10;
 
 var UserSchema = new mongoose.Schema({
-  email: {type: String, required: true, index: {unique: true}}, 
+  email: {type: String, required: true, index: {unique: true}},
   username: {type: String, required: true, index: {unique: true}},
   password: {type: String, required: true},
+  name: {type: String, required: true},
+  birthday: {type: Date, required: true},
+  bio: {type: String, required: false},
+  gender: {type: String, enum: ['M', 'F', 'O'], required: true},
+  preferences: [
+    {type: String, enum: ['M', 'F', 'O']}
+    ],
+  swipeLeft: [
+    {type: Schema.ObjectId, ref: "User"}
+  ],
+  swipeRight: [
+    {type: Schema.ObjectId, ref: "User"}
+  ],
+  matches: [
+    {type: Schema.ObjectId, ref: "User"}
+  ],
+  fingerprintData: [
+    {type: Number}
+  ]
 });
 
 // Hashes a password
@@ -48,7 +67,7 @@ var User = mongoose.model('User', UserSchema);
 // Matches a regex to a potential username and returns if it's valid
 // Usernames are only valid if they're only composed of numbers and letters
 var validateUsername = function (username) {
-  var letterNumber = /^[0-9a-zA-Z]+$/; 
+  var letterNumber = /^[0-9a-zA-Z]+$/;
   return letterNumber.test(username);
 };
 
@@ -58,7 +77,14 @@ var validateEmail = function (email) {
   return re.test(email);
 }
 
+// Returns if a bio is small enough
+var validateBio = function (bio) {
+  var maxLength = 140;
+  return !bio || bio.length <= maxLength;
+}
+
 User.schema.path('username').validate(validateUsername, 'Username can only contain numbers and letters.');
 User.schema.path('email').validate(validateEmail, 'Invalid email.');
+User.schema.path('bio').validate(validateBio, 'Bio is too long.');
 
 exports.User = User;
