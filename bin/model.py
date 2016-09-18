@@ -14,11 +14,9 @@ def contr2(im, vmin, vmax, k = 1):
 
 model = load_model('bin/big_model.h5')
 Xi = imread(sys.argv[1])
-print Xi
 Xi = imresize(Xi[:,15:-15], (80,64))
 Xi = contr2(Xi, 40, 160, 0.005)
 Xi = Xi.reshape(1, 1, 80, 64) / 255.0
 
-print Xi
 for val in model.predict(Xi)[0]:
     print val

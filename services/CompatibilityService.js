@@ -35,8 +35,10 @@ var CompatibilityService = {
       'python',
       [
         'bin/model.py',
-        'public/uploads/' + user.username + '-' + 'fingerprint.jpg'
+        'public/' + user.fingerprintImgPath
       ]);
+      console.log(user);
+      console.log(user.fingerprintImgPath);
     var output = "";
     python.stdout.on('data', function(data) {
       output += data
@@ -44,7 +46,12 @@ var CompatibilityService = {
     python.on('close', function(code) {
       console.log("exited with status code " + code);
       console.log("output was " + output);
-      user.fingerprintData = output.split("\n").map(parseFloat);
+      user.fingerprintData = output.split("\n").splice(0, -2).map(function(x) {
+        console.log(x);
+
+        console.log(parseFloat(x));
+        return parseFloat(x);
+      });
       console.log("fingerprint data is " + user.fingerprintData);
       return next(user);
     });
