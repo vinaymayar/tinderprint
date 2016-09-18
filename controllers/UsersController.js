@@ -37,22 +37,22 @@ var UsersController = {
     }
 
     //TODO: use fingerprint
-    CompatibilityService.setFingerprintData(newUser, function() {
-
-    return newUser
-    .saveQ()
-    .then(function(user) {
-      return SessionsController.login(req, res, function(err) {
-        return utils.sendNotLoggedInResponse(res);
-      });
-    }).catch(function(err) {
-      var message = 'Unknown server error.';
-      if (err.code && (err.code === 11000 || err.code === 11001)) {
-        var message = 'Username or email is already taken.';
-      }
-      return res.render('signup', {
-        username: req.query.username || "",
-        error: { message: err.message }
+    CompatibilityService.setFingerprintData(newUser, function(newUser) {
+      return newUser
+      .saveQ()
+      .then(function(user) {
+        return SessionsController.login(req, res, function(err) {
+          return utils.sendNotLoggedInResponse(res);
+        });
+      }).catch(function(err) {
+        var message = 'Unknown server error.';
+        if (err.code && (err.code === 11000 || err.code === 11001)) {
+          var message = 'Username or email is already taken.';
+        }
+        return res.render('signup', {
+          username: req.query.username || "",
+          error: { message: err.message }
+        });
       });
     });
   }

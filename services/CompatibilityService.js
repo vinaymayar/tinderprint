@@ -33,9 +33,10 @@ var CompatibilityService = {
     //TODO: get user link
     var python = require('child_process').spawn(
       'python',
-      ['bin/model.py',
-        'fingers/']
-    );
+      [
+        'bin/model.py',
+        'public/uploads/' + user.username + '-' + 'fingerprint.jpg'
+      ]);
     var output = "";
     python.stdout.on('data', function(data) {
       output += data
