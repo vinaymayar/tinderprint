@@ -34,3 +34,8 @@ button.btn.btn-default {
 .list-group-item-heading {
   margin-bottom: 14px;
 }
+
+.match {
+ padding-left: 0px;
+ padding-right: 15px;
+ }

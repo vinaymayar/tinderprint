@@ -19,11 +19,14 @@ var User = mongoose.model('User');
 var UsersController = {
 
   matches:  function(req, res) {
-    User.find({'_id': {'$in': req.user.matches}})
+    User.findQ({'_id': {'$in': req.user.matches}})
     .then(function(users) {
       return res.render('matches', {
-        matches: users
+        matches: users,
+        loggedIn: req.user ? true : false
       });
+    }).catch(function(err) {
+      console.log(err);
     });
   },
 
