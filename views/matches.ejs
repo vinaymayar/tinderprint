@@ -8,11 +8,13 @@
     <div class="container">
       <div class="row" style="margin-top: 50px;">
         <div class="col-md-offset-3 col-md-6 col-xs-offset-1 col-xs-10">
-          <ul>
-            <% matches.forEach(function(user){ %>
-              <% include partials/match %>
+          <div class="list-group">
+            <% matches.forEach(function(candidate){ %>
+              <% var profile = candidate.profileImgPath; %>
+              <% var fingerprint = candidate.fingerprintImgPath; %>
+              <%- include partials/match %>
             <% }); %>
-          </ul>
+          </div>
         </div>
       </div>
     </div>

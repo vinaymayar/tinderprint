@@ -1,2 +1,15 @@
-<span> it's a match! </span>
-<%= user %>
+<a href="#" class="list-group-item row">
+  <div class="col-md-3 col-xs-4 match">
+    <div class="profile-image">
+      <img class="fingerprint" src="<%= fingerprint %>" alt="fingerprint">
+      <img class="profile" src="<%= profile %>" alt="profile" width="100%", height="auto">
+    </div>
+  </div>
+  <div class="col-md-9 col-xs-8 match">
+    <h5 class="list-group-item-heading">
+      <%= candidate.name %>
+      <span class="pull-right"> <%= candidate.gender %> <%= candidate.age %></span>
+    </h5>
+    <p><%= candidate.bio %></p>
+  </div>
+</a>

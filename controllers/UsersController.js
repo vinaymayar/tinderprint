@@ -18,6 +18,15 @@ var User = mongoose.model('User');
 
 var UsersController = {
 
+  matches:  function(req, res) {
+    User.find({'_id': {'$in': req.user.matches}})
+    .then(function(users) {
+      return res.render('matches', {
+        matches: users
+      });
+    });
+  },
+
   /* Sign up a new user */
   signup: function(req, res) {
     var newUser = new User({

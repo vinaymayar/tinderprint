@@ -31,12 +31,6 @@ button.btn.btn-default {
   bottom: 0;
 }
 
-a.swipe.glyphicon {
-  font-size: 5em;
-  color: white;
-}
-
-.swipers {
-  width: 50%;
-  margin: 0 auto;
+.list-group-item-heading {
+  margin-bottom: 14px;
 }

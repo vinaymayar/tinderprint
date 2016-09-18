@@ -110,9 +110,7 @@ router.post('/swipe-right', utils.auth, function(req, res) {
  * Response is a webpage
  */
 router.get('/matches', utils.auth, function(req, res) {
-  return res.render('matches', {
-    matches: req.user.matches
-  })
+  return UsersController.matches(req, res);
 });
 
 module.exports = router;
