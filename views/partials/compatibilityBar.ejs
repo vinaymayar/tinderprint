@@ -4,7 +4,7 @@
       <div class="progress">
         <div id="compatibility-bar" class="progress-bar progress-bar-striped active <% if(compatibility > 70) { %> progress-bar-success <% } else if(compatibility > 30) { %> progress-bar-warning <% } else { %> progress-bar-danger <% } %>"
           role="progressbar"
-          aria-valuenow="<%= compatibility %>" aria-valuemin="0" aria-valuemax="100" style="width:<%= compatibility + 50 %>%">
+          aria-valuenow="<%= compatibility %>" aria-valuemin="0" aria-valuemax="100" style="width:<%= compatibility %>%">
           <%= compatibility %>% compatible!
         </div>
       </div>
