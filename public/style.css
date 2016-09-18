@@ -4,6 +4,20 @@
   color: tomato;
 }
 
+a.swipe.glyphicon {
+  font-size: 5em;
+  color: white;
+}
+
+.swipers {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.list-group-item-heading {
+  margin-bottom: 14px;
+}
+
 body {
   font-family: 'Open Sans', sans-serif;
   background-color: tomato;

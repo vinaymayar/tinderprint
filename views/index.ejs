@@ -6,7 +6,10 @@
     <% include ./partials/header %>
 
     <div class="container">
-      <div class="row" style="margin-top: 30px;">
+
+      <% include ./partials/error %>
+
+      <div class="row" style="margin-top: 20px;">
         <div class="col-md-offset-3 col-md-6 col-xs-offset-1 col-xs-10">
           <p>
             <strong>Tinderprint</strong> is a dating app that matches you with people based
@@ -17,6 +20,7 @@
             We use these qualities to match you with people with compatible
             personalities, helping you get to your next major life event &hearts;.
           </p>
+          <br>
           <p>
             Tinderprint uses a convolutional neural network trained on a public data set
             to identify the prominent features of your fingerprint.  According to thousands of years
@@ -28,8 +32,6 @@
           </p>
         </div>
       </div>
-
-      <% include ./partials/error %>
 
       <% if(!loggedIn) { %>
 
