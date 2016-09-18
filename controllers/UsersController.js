@@ -32,7 +32,9 @@ var UsersController = {
     return newUser
     .saveQ()
     .then(function(user) {
-      return utils.sendSuccessResponse(res);
+      return SessionsController.login(req, res, function(err) {
+        return utils.sendErrResponse(res, 403, err);
+      });
     }).catch(function(err) {
       if (err.code && (err.code === 11000 || err.code === 11001)) {
         return utils.sendErrResponse(res, 400, {'message': 'Username or email is already taken.'});
