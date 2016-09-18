@@ -32,8 +32,10 @@ var UsersController = {
       profileImgPath: 'uploads/' + req.body.username + '-profile-pic.jpg'
     });
 
-    for(var i = 0; i < req.body.preferences.length; i++) {
-      newUser.preferences.push(req.body.preferences[i]);
+    if(req.body.preferences && req.body.preferences.length > 0) {
+      for(var i = 0; i < req.body.preferences.length; i++) {
+        newUser.preferences.push(req.body.preferences[i]);
+      }
     }
 
     //TODO: use fingerprint
@@ -48,11 +50,17 @@ var UsersController = {
       }).catch(function(err) {
         var message = 'Unknown server error.';
         if (err.code && (err.code === 11000 || err.code === 11001)) {
-          var message = 'Username or email is already taken.';
+          message = 'Username or email is already taken.';
+        } else if (err.message === 'User validation failed') {
+          console.log(err.errors);
+          message = Object.keys(err.errors).reduce(function(message, current) {
+            return message + "\n" + err.errors[current].message;
+          }, "");
         }
+
         return res.render('signup', {
           username: req.query.username || "",
-          error: { message: err.message }
+          error: { message: message }
         });
       });
     });
