@@ -18,7 +18,6 @@ var User = mongoose.model('User');
 var CandidatesController = {
   /* Get a new candidate. */
   newCandidate: function(req, res) {
-    console.log("HI");
     return User.find()
     .where('gender').in(req.user.preferences)
     .where('_id').ne(req.user._id)
@@ -27,7 +26,6 @@ var CandidatesController = {
     .limit(1)
     .execQ()
     .then(function(users) {
-      console.log(users.length);
       if(users.length > 0) {
         var candidate = users[0];
         // calculate compatibility

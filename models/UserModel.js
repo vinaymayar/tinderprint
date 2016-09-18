@@ -18,7 +18,7 @@ var UserSchema = new mongoose.Schema({
   bio: {type: String, required: false},
   gender: {type: String, enum: ['M', 'F', 'O'], required: true},
   preferences: [
-    {type: String, enum: ['M', 'F', 'O']}
+    {type: String}
     ],
   swipeLeft: [
     {type: Schema.ObjectId, ref: "User"}

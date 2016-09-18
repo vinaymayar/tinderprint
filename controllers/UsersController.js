@@ -27,9 +27,12 @@ var UsersController = {
       name: req.body.name,
       bio: req.body.bio,
       gender: req.body.gender,
-      preferences: req.body.preferences,
       birthday: req.body.birthday
     });
+
+    for(var i = 0; i < req.body.preferences.length; i++) {
+      newUser.preferences.push(req.body.preferences[i]);
+    }
 
     //TODO: use fingerprint
     newUser.fingerprintData = CompatibilityService.getFingerprintData();
