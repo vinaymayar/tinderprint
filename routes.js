@@ -16,7 +16,7 @@ var storage = multer.diskStorage({
     next(null, './public/uploads');
   },
   filename: function (req, file, next) {
-    var fileName = req.body.username + '-' + file.fieldname + ".jpg";
+    var fileName = req.body.username + '-' + file.fieldname + '.' + file.originalname.split(".").slice(-1)[0];
     next(null, fileName);
   }
 })
