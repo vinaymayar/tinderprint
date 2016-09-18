@@ -41,7 +41,9 @@ var CandidatesController = {
         return res.render('candidates', {
           loggedIn: req.user ? true : false,
           candidate: candidate,
-          compatibility: compatibility
+          compatibility: compatibility,
+          fingerprint: req.user.fingerprintImgPath,
+          profile: req.user.profileImgPath,
         });
       } else {
         return res.render('noCandidates');

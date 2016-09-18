@@ -9,6 +9,20 @@ var SessionsController = require('./controllers/SessionsController');
 var UsersController = require('./controllers/UsersController');
 var CandidatesController = require('./controllers/CandidatesController');
 
+// use multer for file upload
+var multer  = require('multer');
+var storage = multer.diskStorage({
+  destination: function (req, file, next) {
+    next(null, './public/uploads');
+  },
+  filename: function (req, file, next) {
+    var fileName = req.body.username + '-' + file.fieldname + ".jpg";
+    next(null, fileName);
+  }
+})
+
+var upload = multer({ storage: storage });
+
 var User = mongoose.model('User');
 
 router.get('/', function(req, res) {
@@ -35,7 +49,10 @@ router.get('/signup', function(req, res) {
  *   - email: String, the user's email.
  * Response is a webpage.
  */
-router.post('/users', function(req, res) {
+router.post('/users', upload.fields([
+    { name: 'profile-pic', maxCount: 1 },
+    { name: 'fingerprint', maxCount: 1 }
+  ]), function(req, res) {
   return UsersController.signup(req, res);
 });
 

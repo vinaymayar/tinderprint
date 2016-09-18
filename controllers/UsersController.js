@@ -27,7 +27,9 @@ var UsersController = {
       name: req.body.name,
       bio: req.body.bio,
       gender: req.body.gender,
-      birthday: req.body.birthday
+      birthday: req.body.birthday,
+      fingerprintImgPath: 'uploads/' + req.body.username + '-' + 'fingerprint.jpg',
+      profileImgPath: 'uploads/' + req.body.username + '-' + 'profile-pic.jpg'
     });
 
     for(var i = 0; i < req.body.preferences.length; i++) {
