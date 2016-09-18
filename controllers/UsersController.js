@@ -29,6 +29,10 @@ var UsersController = {
       preferences: req.body.preferences,
       birthday: req.body.birthday
     });
+
+    //TODO: use fingerprint
+    newUser.fingerprintData = CompatibilityService.getFingerprintData();
+
     return newUser
     .saveQ()
     .then(function(user) {
