@@ -23,10 +23,7 @@ var User = mongoose.model('User');
  *   - username: String, the user's name.
  *   - password: String, the user's password.
  *   - email: String, the user's email.
- * Response:
- *   - success: true if the server succeeded in creating a new user. A verification email will be sent.
- *   - content: null 
- *   - err: if failure, an error message on database or authentication failure.
+ * Response is a webpage.
  */
 router.post('/', function(req, res) {
   return UsersController.signup(req, res);
@@ -57,6 +54,14 @@ router.post('/login', function(req, res, next) {
  */
 router.get('/logout', function(req, res) {
   return SessionsController.logout(req, res);
+});
+
+/**
+ * Gets the next candidate for the logged in user.
+ * Response is a webpage.
+ */
+router.get('/newCandidate', utils.auth, function(req, res) {
+  return UsersController.newCandidate(req, res);
 });
 
 module.exports = router;

@@ -33,13 +33,40 @@ var UsersController = {
     .saveQ()
     .then(function(user) {
       return SessionsController.login(req, res, function(err) {
-        return utils.sendErrResponse(res, 403, err);
+        return utils.sendNotLoggedInResponse(res);
       });
     }).catch(function(err) {
+      var message = 'Unknown server error.';
       if (err.code && (err.code === 11000 || err.code === 11001)) {
-        return utils.sendErrResponse(res, 400, {'message': 'Username or email is already taken.'});
+        var message = 'Username or email is already taken.';
+      }
+      return res.render('signup', {
+        username: req.query.username || "",
+        error: { message: err.message }
+      });
+    });
+  },
+
+  /* Get a new candidate. */
+  newCandidate: function(req, res) {
+    return User.find()
+    .where('gender').in(req.user.preferences)
+    .where('_id').nin(req.user.swipeLeft)
+    .where('_id').nin(req.user.swipeRight)
+    .limit(1)
+    .execQ()
+    .then(function(users) {
+      console.log(users.length);
+      if(users.length > 0) {
+        var candidate = users[0];
+        // calculate compatibility
+        var compatibility = CompatibilityService.getCompatibility(req.user, candidate);
+        return res.render('candidates', {
+          candidate: candidate,
+          compatibility: compatibility
+        });
       } else {
-        return utils.sendErrResponse(res, 500, err);
+        return res.render('noCandidates');
       }
     });
   }

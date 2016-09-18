@@ -106,11 +106,9 @@ passport.deserializeUser(function(id, done) {
 });
 
 // loading routes
-var index = require('./routes/index');
-var users = require('./routes/users');
+var routes = require('./routes.js');
 
-app.use('/', index);
-app.use('/users', users);
+app.use('/', routes);
 
 if (app.get('env') === 'development') {
   app.set('URL', 'http://localhost:3000');

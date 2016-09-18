@@ -34,8 +34,16 @@ utils.auth = function(req, res, next) {
   if (req.user) {
     return next();
   } else {
-    return utils.sendErrResponse(res, 401);
+    return utils.sendNotLoggedInResponse(res);
+    //return utils.sendErrResponse(res, 401);
   }
+};
+
+utils.sendNotLoggedInResponse = function(res) {
+  return res.render('index', {
+    loggedIn: false,
+    error: { message: 'You must be logged in to view that page.' }
+  });
 };
 
 /**

@@ -9,7 +9,8 @@ var utils = require('../utils/utils');
 
 router.get('/', function(req, res) {
   return res.render('index', {
-    loggedIn: req.user ? true : false
+    loggedIn: req.user ? true : false,
+    error: false
   });
 });
 
@@ -21,7 +22,9 @@ router.get('/candidates', function(req, res) {
 
 router.get('/signup', function(req, res) {
   return res.render('signup', {
-    loggedIn: req.user ? true : false
+    loggedIn: req.user ? true : false,
+    username: req.query.username || "",
+    error: false
   });
 });
 

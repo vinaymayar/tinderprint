@@ -22,7 +22,10 @@ var SessionsController = {
         return next(err);
       };
       if (!user) {
-        return utils.sendErrResponse(res, 401, info.message);
+        return res.render('index', { 
+          loggedIn: false,
+          error: { message: 'The username or password you entered is not correct.' }
+        });
       };
       req.login(user, function(err) {
         if (err) {

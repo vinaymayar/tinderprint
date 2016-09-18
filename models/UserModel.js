@@ -1,5 +1,5 @@
 /**
- * UsereModel.js
+ * UserModel.js
  *
  * Model for user.
  */

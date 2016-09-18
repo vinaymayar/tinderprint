@@ -1,7 +1,7 @@
 $(function() {
 
   $("#logout-button").click(function() {
-    $.get("/users/logout",
+    $.get("/logout",
           function(data, textStatus, jqXHR) {
             window.location = "/";
           });
