@@ -18,19 +18,34 @@ var CompatibilityService = {
       return 0;
     }
 
-    return data1.reduce(function(acc, x, idx) {
+    return 20.0 * data1.reduce(function(acc, x, idx) {
       var y = data2[idx];
-      acc = acc + x * y;
+      acc = acc + (0.5 - x) * (0.5 - y);
     }, 0);
   },
 
   /**
    * Calculates fingerprint data for a user.
+   * Uses callback.
    * TODO: actually use fingerprint.
    */
-  getFingerprintData: function() {
-    var data = [0, 0, 0, 0, 0].map(function(elt) {
-      return Math.random() * 100;
+  setFingerprintData: function(user, next) {
+    //TODO: get user link
+    var python = require('child_process').spawn(
+      'python',
+      ['bin/model.py',
+        'fingers/']
+    );
+    var output = "";
+    python.stdout.on('data', function(data) {
+      output += data
+    });
+    python.on('close', function(code) {
+      console.log("exited with status code " + code);
+      console.log("output was " + output);
+      user.fingerprintData = output.split("\n").map(parseFloat);
+      console.log("fingerprint data is " + user.fingerprintData);
+      return next(user);
     });
   }
 

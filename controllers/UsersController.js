@@ -37,7 +37,7 @@ var UsersController = {
     }
 
     //TODO: use fingerprint
-    newUser.fingerprintData = CompatibilityService.getFingerprintData();
+    CompatibilityService.setFingerprintData(newUser, function() {
 
     return newUser
     .saveQ()
