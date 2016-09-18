@@ -16,7 +16,7 @@
 
       <div class="row" style="margin-top:50px;margin-bottom:50px;">
         <div class="col-md-offset-3 col-md-6 col-xs-offset-1 col-xs-10">
-          <form action="users" method="POST">
+          <form action="users" method="POST" enctype="multipart/form-data">
             <div class="form-group">
               <label for="name-input">Name</label>
               <input type="text" class="form-control" id="name-input" name="name" placeholder="">
@@ -53,7 +53,14 @@
               <label for="bio-input">Bio</label>
               <textarea class="form-control" rows="3" id="bio-input" name="bio" placeholder="Tell us about yourself in at most 140 characters."></textarea>
             </div>
-
+            <div class="form-group">
+              <label for="fingerprint-input">Fingerprint</label>
+              <input type="file" class="btn btn-default" name="fingerprint" id="fingerprint-input" accept="image/*">
+            </div>
+            <div class="form-group">
+              <label for="profile-pic-input">Profile picture</label>
+              <input type="file" class="btn btn-default" name="profile-pic" id="profile-pic-input" accept="image/*">
+            </div>
 
             <button id="sign-up-button" type="submit" class="btn btn-default">Sign up</button>
           </form>

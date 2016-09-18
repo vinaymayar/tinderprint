@@ -15,7 +15,7 @@ var UserSchema = new mongoose.Schema({
   password: {type: String, required: true},
   name: {type: String, required: true},
   birthday: {type: Date, required: true},
-  bio: {type: String, required: false},
+  bio: {type: String},
   gender: {type: String, enum: ['M', 'F', 'O'], required: true},
   preferences: [
     {type: String}
@@ -31,7 +31,9 @@ var UserSchema = new mongoose.Schema({
   ],
   fingerprintData: [
     {type: Number}
-  ]
+  ],
+  fingerprintImgPath: {type: String},
+  profileImgPath: {type: String},
 });
 
 // Hashes a password
