@@ -18,10 +18,10 @@ var CompatibilityService = {
       return 0;
     }
 
-    return 20.0 * data1.reduce(function(acc, x, idx) {
+    return 100.0 * (1.0 - Math.sqrt(data1.reduce(function(acc, x, idx) {
       var y = data2[idx];
-      acc = acc + (0.5 - x) * (0.5 - y);
-    }, 0);
+      return acc + Math.pow(x - y, 2);
+    }, 0.0) / 5.0));
   },
 
   /**
@@ -46,7 +46,7 @@ var CompatibilityService = {
     python.on('close', function(code) {
       console.log("exited with status code " + code);
       console.log("output was " + output);
-      user.fingerprintData = output.split("\n").splice(0, -2).map(function(x) {
+      user.fingerprintData = output.substring(0, output.length - 1).split("\n").map(function(x) {
         console.log(x);
 
         console.log(parseFloat(x));

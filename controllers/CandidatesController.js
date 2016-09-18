@@ -29,6 +29,7 @@ var CandidatesController = {
         var candidate = users[0];
         // calculate compatibility
         var compatibility = CompatibilityService.getCompatibility(req.user, candidate);
+        console.log(compatibility);
         // calculate age
         var today = new Date();
         var age = today.getFullYear() - candidate.birthday.getFullYear();
@@ -46,7 +47,9 @@ var CandidatesController = {
           profile: candidate.profileImgPath,
         });
       } else {
-        return res.render('noCandidates');
+        return res.render('noCandidates', {
+          loggedIn: req.user ? true : false
+        });
       }
     });
   },
