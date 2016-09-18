@@ -14,6 +14,12 @@
               <% fingerprint = candidate.fingerprintImgPath; %>
               <%- include partials/match %>
             <% }); %>
+            <% if(matches.length == 0 ) { %>
+            <p> You don't have any matches yet.  Try looking at some more profiles, or give the
+              people you liked
+               some time to like you back!
+            </p>
+            <% } %>
           </div>
         </div>
       </div>
