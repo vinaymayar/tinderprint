@@ -12,6 +12,7 @@ var utils = require('../utils/utils');
 var passport = require('passport');
 var uuid = require('node-uuid');
 var SessionsController = require('../controllers/SessionsController');
+var CompatibilityService = require('../services/CompatibilityService');
 
 var User = mongoose.model('User');
 

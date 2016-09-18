@@ -32,6 +32,15 @@ var CandidatesController = {
         var candidate = users[0];
         // calculate compatibility
         var compatibility = CompatibilityService.getCompatibility(req.user, candidate);
+        // calculate age
+        var today = new Date();
+        var age = today.getFullYear() - candidate.birthday.getFullYear();
+        var m = today.getMonth() - candidate.birthday.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < candidate.birthday.getDate())) {
+            age--;
+        }
+        candidate.age = age;
+
         return res.render('candidates', {
           loggedIn: req.user ? true : false,
           candidate: candidate,
