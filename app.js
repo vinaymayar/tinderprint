@@ -49,6 +49,14 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+/* Middleware to use req.user in template. */
+
+app.use(function(req, res, next) {
+  res.locals.user = req.user;
+  res.locals.loggedIn = req.user ? true : false;
+  next();
+});
+
 /* Middleware to prevent CSRF attacks. */
 //if(app.get('env') !== 'test') {
 //  app.use(csrf());

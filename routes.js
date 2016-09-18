@@ -7,6 +7,7 @@ var uuid = require('node-uuid');
 var MailService = require('./services/MailService');
 var SessionsController = require('./controllers/SessionsController');
 var UsersController = require('./controllers/UsersController');
+var CandidatesController = require('./controllers/CandidatesController');
 
 var User = mongoose.model('User');
 
@@ -70,8 +71,7 @@ router.get('/logout', function(req, res) {
  * Response is a webpage.
  */
 router.get('/candidates', utils.auth, function(req, res) {
-  console.log("about to get candidate");
-  return UsersController.newCandidate(req, res);
+  return CandidatesController.newCandidate(req, res);
 });
 
 module.exports = router;

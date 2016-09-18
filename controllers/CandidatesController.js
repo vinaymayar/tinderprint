@@ -33,6 +33,7 @@ var CandidatesController = {
         // calculate compatibility
         var compatibility = CompatibilityService.getCompatibility(req.user, candidate);
         return res.render('candidates', {
+          loggedIn: req.user ? true : false,
           candidate: candidate,
           compatibility: compatibility
         });

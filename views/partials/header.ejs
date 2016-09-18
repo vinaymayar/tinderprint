@@ -18,9 +18,11 @@
         <li><a href="/candidates" class="glyphicon glyphicon-heart"></a></li>
         <li><a href="/matches">Matches</a></li>
       </ul>
+      <% if(loggedIn) { %>
       <ul class="nav navbar-nav navbar-right">
         <li><button class="btn btn-default navbar-btn" id="logout-button" type="button">Logout</button></li>
       </ul>
+      <% } %>
     </div>
   </div>
 
