@@ -30,3 +30,13 @@ button.btn.btn-default {
   right: 0;
   bottom: 0;
 }
+
+a.swipe.glyphicon {
+  font-size: 5em;
+  color: white;
+}
+
+.swipers {
+  width: 50%;
+  margin: 0 auto;
+}

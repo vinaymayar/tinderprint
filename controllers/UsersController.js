@@ -53,32 +53,6 @@ var UsersController = {
         error: { message: err.message }
       });
     });
-  },
-
-  /* Get a new candidate. */
-  newCandidate: function(req, res) {
-    console.log("HI");
-    return User.find()
-    .where('gender').in(req.user.preferences)
-    .where('_id').ne(req.user._id)
-    .where('_id').nin(req.user.swipeLeft)
-    .where('_id').nin(req.user.swipeRight)
-    .limit(1)
-    .execQ()
-    .then(function(users) {
-      console.log(users.length);
-      if(users.length > 0) {
-        var candidate = users[0];
-        // calculate compatibility
-        var compatibility = CompatibilityService.getCompatibility(req.user, candidate);
-        return res.render('candidates', {
-          candidate: candidate,
-          compatibility: compatibility
-        });
-      } else {
-        return res.render('noCandidates');
-      }
-    });
   }
 
 }

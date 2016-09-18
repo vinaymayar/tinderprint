@@ -9,5 +9,12 @@
     <p>
       <span><%= candidate.bio %></span>
     </p>
+    <div class="swipers">
+      <a class="btn swipe glyphicon glyphicon-remove" id="swipe-left" role="button"></a>
+      <a class="btn swipe glyphicon glyphicon-heart pull-right" id="swipe-right" role="button"></a>
+    </div>
+    <input type="hidden" id="candidate" value="<%= candidate._id %>">
   </div>
 </div>
+
+<script src="swipers.js"></script>

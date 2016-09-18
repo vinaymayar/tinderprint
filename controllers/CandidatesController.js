@@ -18,14 +18,13 @@ var User = mongoose.model('User');
 var CandidatesController = {
   /* Get a new candidate. */
   newCandidate: function(req, res) {
-    return User.find()
-    .where('gender').in(req.user.preferences)
-    .where('_id').ne(req.user._id)
-    .where('_id').nin(req.user.swipeLeft)
-    .where('_id').nin(req.user.swipeRight)
-    .limit(1)
-    .execQ()
-    .then(function(users) {
+    return User.findByIdQ(req.user._id)
+    .then(function(user) {
+      return User.find({'_id': {'$ne': user._id, '$nin': user.swipeLeft.concat(user.swipeRight)}})
+      .where('gender').in(user.preferences)
+      .limit(1)
+      .execQ()
+    }).then(function(users) {
       if(users.length > 0) {
         var candidate = users[0];
         // calculate compatibility
@@ -48,8 +47,44 @@ var CandidatesController = {
         return res.render('noCandidates');
       }
     });
-  }
+  },
 
+  /* Swipe left on a candidate. */
+  swipeLeft: function(req, res) {
+    console.log(req.user._id + " is swiping left on " + req.body.candidate);
+    return User.findByIdQ(req.user._id)
+    .then(function(user) {
+      user.swipeLeft.push(req.body.candidate)
+      return user.saveQ();
+    }).then(function(user) {
+      return utils.sendSuccessResponse(res, null);
+    }).catch(function(err) {
+      return utils.sendErrResponse(res, 500, err);
+    });
+  },
+
+  swipeRight: function(req, res) {
+    console.log(req.user._id + " is swiping right on " + req.body.candidate);
+    return User.findByIdQ(req.user._id)
+    .then(function(user) {
+      user.swipeRight.push(req.body.candidate)
+      return [user.saveQ(), User.findByIdQ(req.body.candidate)];
+    }).spread(function(user, candidate) {
+      if(candidate.swipeRight.indexOf(req.user._id) > -1) {
+        user.matches.push(candidate._id);
+        candidate.matches.push(user._id);
+        return [user.saveQ(), candidate.saveQ(), true];
+      } else {
+        return [false, false, false];
+      }
+    }).spread(function(user, candidate, match) {
+      return utils.sendSuccessResponse(res, {
+        match: match
+      });
+    }).catch(function(err) {
+      return utils.sendErrResponse(res, 500, err);
+    });
+  }
 }
 
 module.exports = CandidatesController;

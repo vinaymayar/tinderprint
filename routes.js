@@ -74,4 +74,18 @@ router.get('/candidates', utils.auth, function(req, res) {
   return CandidatesController.newCandidate(req, res);
 });
 
+/**
+ * Swipe left on someone.
+ */
+router.post('/swipe-left', utils.auth, function(req, res) {
+  return CandidatesController.swipeLeft(req, res);
+});
+
+/**
+ * Swipe right on someone.
+ */
+router.post('/swipe-right', utils.auth, function(req, res) {
+  return CandidatesController.swipeRight(req, res);
+});
+
 module.exports = router;
