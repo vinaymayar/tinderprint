@@ -19,3 +19,14 @@ body p {
 button.btn.btn-default {
   color: tomato;
 }
+
+.profile-image {
+  position: relative;
+}
+
+.fingerprint {
+  width: 20%;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}

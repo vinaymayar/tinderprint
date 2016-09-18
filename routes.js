@@ -37,7 +37,7 @@ router.get('/signup', function(req, res) {
  */
 router.post('/users', function(req, res) {
   return UsersController.signup(req, res);
-}); 
+});
 
 /**
  * Login as an existing user. Fails of user doesn't exist or isn't verified.
