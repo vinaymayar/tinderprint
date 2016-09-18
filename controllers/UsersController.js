@@ -12,6 +12,7 @@ var utils = require('../utils/utils');
 var passport = require('passport');
 var uuid = require('node-uuid');
 var SessionsController = require('../controllers/SessionsController');
+var CompatibilityService = require('../services/CompatibilityService');
 
 var User = mongoose.model('User');
 
@@ -49,8 +50,10 @@ var UsersController = {
 
   /* Get a new candidate. */
   newCandidate: function(req, res) {
+    console.log("HI");
     return User.find()
     .where('gender').in(req.user.preferences)
+    .where('_id').ne(req.user._id)
     .where('_id').nin(req.user.swipeLeft)
     .where('_id').nin(req.user.swipeRight)
     .limit(1)

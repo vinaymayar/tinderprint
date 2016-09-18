@@ -10,7 +10,7 @@ var CompatibilityService = {
   /**
    * Calculates fingerprint compatibility between two people.
    */
-  getCompatibility(user1, user2) {
+  getCompatibility: function(user1, user2) {
     var data1 = user1.fingerprintData;
     var data2 = user2.fingerprintData;
     return data1.reduce(function(acc, x, idx) {

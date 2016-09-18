@@ -17,12 +17,6 @@ router.get('/', function(req, res) {
   });
 });
 
-router.get('/candidates', function(req, res) {
-  return res.render('candidates', {
-    loggedIn: req.user ? true : false
-  });
-});
-
 router.get('/signup', function(req, res) {
   return res.render('signup', {
     loggedIn: req.user ? true : false,
@@ -76,6 +70,7 @@ router.get('/logout', function(req, res) {
  * Response is a webpage.
  */
 router.get('/candidates', utils.auth, function(req, res) {
+  console.log("about to get candidate");
   return UsersController.newCandidate(req, res);
 });
 

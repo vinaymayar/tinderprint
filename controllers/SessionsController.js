@@ -10,6 +10,7 @@ var mongoose = require('mongoose');
 var utils = require('../utils/utils');
 var passport = require('passport');
 var uuid = require('node-uuid');
+var UsersController = require('./UsersController');
 
 var User = mongoose.model('User');
 
@@ -31,7 +32,7 @@ var SessionsController = {
         if (err) {
           return next(err);
         } else {
-          return res.render('candidates');
+          return UsersController.newCandidate(req, res);
         }
       });
     })(req, res, next);
