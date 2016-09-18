@@ -10,7 +10,7 @@ var mongoose = require('mongoose');
 var utils = require('../utils/utils');
 var passport = require('passport');
 var uuid = require('node-uuid');
-var UsersController = require('./UsersController');
+var CandidatesController = require('./CandidatesController');
 
 var User = mongoose.model('User');
 
@@ -23,7 +23,7 @@ var SessionsController = {
         return next(err);
       };
       if (!user) {
-        return res.render('index', { 
+        return res.render('index', {
           loggedIn: false,
           error: { message: 'The username or password you entered is not correct.' }
         });
@@ -32,7 +32,7 @@ var SessionsController = {
         if (err) {
           return next(err);
         } else {
-          return UsersController.newCandidate(req, res);
+          return CandidatesController.newCandidate(req, res);
         }
       });
     })(req, res, next);
