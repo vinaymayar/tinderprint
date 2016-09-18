@@ -12,6 +12,7 @@ var utils = require('../utils/utils');
 var passport = require('passport');
 var uuid = require('node-uuid');
 var CompatibilityService = require('../services/CompatibilityService');
+var MailService = require('../services/MailService');
 
 var User = mongoose.model('User');
 
@@ -29,7 +30,6 @@ var CandidatesController = {
         var candidate = users[0];
         // calculate compatibility
         var compatibility = CompatibilityService.getCompatibility(req.user, candidate);
-        console.log(compatibility);
         // calculate age
         var today = new Date();
         var age = today.getFullYear() - candidate.birthday.getFullYear();
@@ -78,6 +78,7 @@ var CandidatesController = {
       if(candidate.swipeRight.indexOf(req.user._id) > -1) {
         user.matches.push(candidate._id);
         candidate.matches.push(user._id);
+        MailService.sendMatchEmail(res, user, candidate);
         return [user.saveQ(), candidate.saveQ(), true];
       } else {
         return [false, false, false];
@@ -87,6 +88,7 @@ var CandidatesController = {
         match: match
       });
     }).catch(function(err) {
+      console.log(err);
       return utils.sendErrResponse(res, 500, err);
     });
   }
